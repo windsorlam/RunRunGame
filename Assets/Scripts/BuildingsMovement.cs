@@ -7,7 +7,6 @@ public class BuildingsMovement : MonoBehaviour {
 	public float minDistance;
 	public float maxDistance;
 	public float screenWidth;
-	private int seed=1;
 
 
 	void Start () {
@@ -25,7 +24,6 @@ public class BuildingsMovement : MonoBehaviour {
 		if (!enabled)
 			return;
 		float maxX = float.NegativeInfinity;
-		Random.seed = seed;
 		foreach (GameObject building in buildings) {
 			building.transform.localPosition=(Vector2)(building.transform.localPosition)-Time.deltaTime*Vector2.right * scrollingSpeed;
 			BoxCollider2D bc=building.gameObject.GetComponent<BoxCollider2D>();
@@ -41,7 +39,7 @@ public class BuildingsMovement : MonoBehaviour {
 				BoxCollider2D bc=building.gameObject.GetComponent<BoxCollider2D>();
 				if(building.transform.localPosition.x<-screenWidth/2-bc.size.x/2){
 					float y=building.transform.localPosition.y;
-					building.transform.localPosition=new Vector3(maxX+Random.Range(minDistance,maxDistance),y,0f);
+					building.transform.localPosition=new Vector3(maxX+Random.Range(minDistance,maxDistance)+bc.size.x/4,y,0f);
 					moved=true;
 				}
 			}
