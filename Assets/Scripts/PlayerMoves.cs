@@ -5,8 +5,8 @@ public class PlayerMoves : MonoBehaviour {
 	public Rigidbody2D rb;
 	public float speed;
 	public float spring;
-	public string foreground;
-	private bool ground=true;
+	//public string foreground;
+	private byte jumpState=0;
 	// Use this for initialization
 	void Start () {
 	}
@@ -15,15 +15,15 @@ public class PlayerMoves : MonoBehaviour {
 	void Update () {
 		//Vector2 position = (Vector2)transform.position;
 		//transform.position = position + Time.deltaTime*Vector2.right * speed;
-		if(Input.GetKeyDown(KeyCode.Space)&&ground){
+		if(Input.GetKeyDown(KeyCode.Space)&&jumpState<2){
 			rb.AddForce(new Vector2(0,spring));
-			ground=false;
+			jumpState++;
 		}
 	}
 
 	void OnCollisionEnter2D(Collision2D other){
-		if (other.gameObject.name.Equals (foreground)&&other.relativeVelocity.y<0) {
-			ground=true;
+		if (other.gameObject.tag.Equals ("Foreground")&&other.relativeVelocity.y<0) {
+			jumpState=0;
 		}
 	}
 }
