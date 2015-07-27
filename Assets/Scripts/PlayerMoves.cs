@@ -57,10 +57,10 @@ public class PlayerMoves : MonoBehaviour {
 
 	void FixedUpdate(){
 		Rigidbody2D rigidBody = player.GetComponent<Rigidbody2D> ();
-		rigidbody.position = new Vector2 (
-				rigidbody.position.x,
-				Mathf.Clamp(rigidbody.position.y, boundary.yMin, boundary.yMax)
-			);
+		rigidBody.position = new Vector2 (
+			rigidBody.position.x,
+			Mathf.Clamp(rigidBody.position.y, boundary.yMin, boundary.yMax)
+		);
 	}
 
 	void FlipAction(){
@@ -94,8 +94,10 @@ public class PlayerMoves : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D other){
-		if (other.gameObject.tag.Equals ("Foreground")&&other.relativeVelocity.y<0) {
-			jumpState=0;
+		if (other.gameObject.tag.Equals ("Building") || other.gameObject.tag.Equals ("Bridge")){
+		    if(other.relativeVelocity.y<0) {
+				jumpState=0;
+			}
 		}
 		if (other.gameObject.tag.Equals ("Bridge") && other.relativeVelocity.y < 0) {
 			collideBridge = true;
