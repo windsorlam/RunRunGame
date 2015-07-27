@@ -25,6 +25,10 @@ public class PlayerMoves : MonoBehaviour {
 	private Quaternion qua_upright, qua_reverse;
 	Vector2 gra_upright, gra_reverse;
 
+	//jump MA
+	//public float moveSpeed;
+	//public float jumpHight;
+	
 	//set a boundary for player
 	public Boundary boundary;
 
@@ -44,10 +48,14 @@ public class PlayerMoves : MonoBehaviour {
 		//Vector2 position = (Vector2)transform.position;
 		//transform.position = position + Time.deltaTime*Vector2.right * speed;
 		if(Input.GetKeyDown(KeyCode.UpArrow)&&jumpState<2){
-			rb.AddForce(new Vector2(0,spring));
+			//
+			rb.AddForce(new Vector2(rigidbody2D.velocity.x,spring));
 			jumpState++;
 		}
-
+		//if(Input.GetKey(KeyCode.RightArrow)&&jumpState<2){
+			//rb.velocity= new Vector2(0,jumpHight);
+		//	rb.velocity= new Vector2(moveSpeed,rigidbody2D.velocity.y);
+		//}
 		score ++;
 		//set UI Score??
 		FlipAction ();
@@ -96,7 +104,6 @@ public class PlayerMoves : MonoBehaviour {
 		if (other.gameObject.tag.Equals ("Building") || other.gameObject.tag.Equals ("Bridge") && other.relativeVelocity.y<0) {
 				jumpState=0;
 			}
-		}
 		if (other.gameObject.tag.Equals ("Bridge")) {
 			collideBridge = true;
 		} 
