@@ -12,8 +12,7 @@ public class PlayerMoves : MonoBehaviour {
 	public float spring;
 	//public string foreground;
 	private byte jumpState=0;
-
-	public GameObject player;
+	
 	public GameObject Score;
 
 
@@ -56,7 +55,7 @@ public class PlayerMoves : MonoBehaviour {
 	}
 
 	void FixedUpdate(){
-		Rigidbody2D rigidBody = player.GetComponent<Rigidbody2D> ();
+		Rigidbody2D rigidBody = GetComponent<Rigidbody2D> ();
 		rigidBody.position = new Vector2 (
 			rigidBody.position.x,
 			Mathf.Clamp(rigidBody.position.y, boundary.yMin, boundary.yMax)
@@ -73,7 +72,7 @@ public class PlayerMoves : MonoBehaviour {
 			if( !collideBridge ){
 				//!!!!!!!!!!!!!!!! fail
 				//set failUI
-				player.gameObject.SetActive(false);
+				//this.gameObject.SetActive(false);
 			}
 
 			if( flip==0 ){
@@ -94,10 +93,8 @@ public class PlayerMoves : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D other){
-		if (other.gameObject.tag.Equals ("Building") || other.gameObject.tag.Equals ("Bridge")){
-		    if(other.relativeVelocity.y<0) {
-				jumpState=0;
-			}
+		if ((other.gameObject.tag.Equals ("Building") || other.gameObject.tag.Equals ("Bridge"))&&other.relativeVelocity.y<0) {
+			jumpState=0;
 		}
 		if (other.gameObject.tag.Equals ("Bridge") && other.relativeVelocity.y < 0) {
 			collideBridge = true;
