@@ -35,6 +35,7 @@ public class BuildingsMovement : MonoBehaviour {
 			bool moved=false;
 			while(!moved){
 				int i=Random.Range(0,buildings.Length);
+				//Debug.Log ("buidings"+buildings.Length);
 				GameObject building=buildings[i];
 				BoxCollider2D bc=building.gameObject.GetComponent<BoxCollider2D>();
 				if(building.transform.localPosition.x<-screenWidth/2-bc.size.x/2){

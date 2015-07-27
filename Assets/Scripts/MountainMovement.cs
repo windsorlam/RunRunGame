@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class MountainMovement : MonoBehaviour {
-	public float speed;
+	public float speed=2f;
 	private Vector2 startPosition;
 
 	// Use this for initialization
