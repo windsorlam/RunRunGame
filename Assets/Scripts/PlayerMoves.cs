@@ -20,6 +20,7 @@ public class PlayerMoves : MonoBehaviour {
 	//variables for flip
 	int flip = 0;
 	int score = 0;
+	bool spaceKeyDown = false;
 	bool collideBridge = false;
 	private Vector3 flipPos;
 	private Quaternion qua_upright, qua_reverse;
@@ -35,7 +36,7 @@ public class PlayerMoves : MonoBehaviour {
 	void Start () {
 		qua_upright = new Quaternion (0.0f, 0.0f, 0.0f, 0.0f);
 		qua_reverse = new Quaternion (180.0f, 0.0f, 0.0f, 0.0f);
-		gra_upright = new Vector2 (0.0f, -2.8f);
+		gra_upright = new Vector2 (0.0f, -4.8f);
 		gra_reverse = new Vector2 (0.0f, 1.0f);
 	}
 	
@@ -50,7 +51,6 @@ public class PlayerMoves : MonoBehaviour {
 
 		score ++;
 		//set UI Score??
-
 		FlipAction ();
 		Debug.Log ("----> Gravity:" + Physics2D.gravity);
 	}
@@ -65,44 +65,47 @@ public class PlayerMoves : MonoBehaviour {
 
 	void FlipAction(){
 		flipPos = rb.gameObject.transform.position;
-		if (Input.GetKey (KeyCode.Space)) {
+		//if (collideBridge) {
+		if (Input.GetKeyDown (KeyCode.Space) && collideBridge) {
 			//if player hold the space key, always reverse the gameobject
 			rb.gameObject.transform.localRotation = qua_reverse;
 			Physics2D.gravity = gra_reverse;
-
-			if( !collideBridge ){
-				//!!!!!!!!!!!!!!!! fail
-				//set failUI
-				player.gameObject.SetActive(false);
-			}
-
-			if( flip==0 ){
+			spaceKeyDown = true;
+			
+			Debug.LogWarning("Button down");
+			if (flip == 0) {
 				//this function is called in update
-				flipPos -= new Vector3(0.0f, 2.8f, 0.0f);
+				flipPos -= new Vector3 (0.0f, 2.8f, 0.0f);
 				rb.gameObject.transform.position = flipPos;
 				flip++;
 			}
-
-		} else if (Input.GetKeyUp (KeyCode.Space)) {
+		} 
+ 			
+		if (Input.GetKeyUp (KeyCode.Space) && spaceKeyDown) {
+			Debug.LogWarning("Button up");
 			rb.gameObject.transform.localRotation = qua_upright;
 			Physics2D.gravity = gra_upright;
-
 			flip = 0;
-			flipPos += new Vector3(0.0f, 2.8f, 0.0f);
+			flipPos += new Vector3 (0.0f, 2.8f, 0.0f);
 			rb.gameObject.transform.position = flipPos;
+			spaceKeyDown = false;
 		}
 	}
-
+	
 	void OnCollisionEnter2D(Collision2D other){
 		if (other.gameObject.tag.Equals ("Building") || other.gameObject.tag.Equals ("Bridge")){
 		    if(other.relativeVelocity.y<0) {
 				jumpState=0;
 			}
 		}
-		if (other.gameObject.tag.Equals ("Bridge") && other.relativeVelocity.y < 0) {
+		if (other.gameObject.tag.Equals ("Bridge")) {
 			collideBridge = true;
-			Debug.Log("detecting collision");
-		} else {
+		} 
+	}
+
+
+	void OnCollisionExit2D(Collision2D other){
+		if (other.gameObject.tag.Equals ("Bridge")) {
 			collideBridge = false;
 		}
 	}
