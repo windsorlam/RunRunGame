@@ -1,6 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[System.Serializable]
+public class Boundary{
+	public float yMin, yMax;
+}
+
 public class PlayerMoves : MonoBehaviour {
 	public Rigidbody2D rb;
 	public float speed;
@@ -10,12 +15,20 @@ public class PlayerMoves : MonoBehaviour {
 
 	public GameObject player;
 	public GameObject Score;
+
+
+	//variables for flip
 	int flip = 0;
 	int score = 0;
 	bool collideBridge = false;
 	private Vector3 flipPos;
 	private Quaternion qua_upright, qua_reverse;
 	Vector2 gra_upright, gra_reverse;
+
+	//set a boundary for player
+	public Boundary boundary;
+
+
 	// Use this for initialization
 
 
@@ -42,7 +55,14 @@ public class PlayerMoves : MonoBehaviour {
 
 		FlipAction ();
 		Debug.Log ("----> Gravity:" + Physics2D.gravity);
+	}
 
+	void FixedUpdate(){
+		Rigidbody2D rigidBody = player.GetComponent<Rigidbody2D> ();
+		rigidbody.position = new Vector2 (
+				rigidbody.position.x,
+				Mathf.Clamp(rigidbody.position.y, boundary.yMin, boundary.yMax)
+			);
 	}
 
 	void FlipAction(){
