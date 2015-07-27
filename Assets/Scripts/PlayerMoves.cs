@@ -37,8 +37,6 @@ public class PlayerMoves : MonoBehaviour {
 		qua_reverse = new Quaternion (180.0f, 0.0f, 0.0f, 0.0f);
 		gra_upright = new Vector2 (0.0f, -2.8f);
 		gra_reverse = new Vector2 (0.0f, 1.0f);
-
-		//rb.gameObject.transform.position = flipPos;
 	}
 	
 	// Update is called once per frame
