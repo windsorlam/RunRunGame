@@ -11,9 +11,8 @@ public class PlayerMoves : MonoBehaviour {
 	public float speed;
 	public float spring;
 	private byte jumpState=0;
-	
-	public GameObject Score;
-
+	public float bottomY;
+	public GameObject over;
 
 	//variables for flip
 	int flip = 0;
@@ -58,6 +57,9 @@ public class PlayerMoves : MonoBehaviour {
 		score ++;
 		//set UI Score??
 		FlipAction ();
+		if (transform.position.y <= bottomY) {
+			Die();
+		}
 	}
 
 	void FixedUpdate(){
@@ -100,8 +102,12 @@ public class PlayerMoves : MonoBehaviour {
 	
 	void OnCollisionEnter2D(Collision2D other){
 		if (other.gameObject.tag.Equals ("Building") || other.gameObject.tag.Equals ("Bridge") && other.relativeVelocity.y<0) {
-				jumpState=0;
+			jumpState=0;
+			ContactPoint2D[] contacts=other.contacts;
+			if(contacts[0].normal.y==0){
+				Die ();
 			}
+		}
 		if (other.gameObject.tag.Equals ("Bridge")) {
 			collideBridge = true;
 		} 
@@ -112,5 +118,10 @@ public class PlayerMoves : MonoBehaviour {
 		if (other.gameObject.tag.Equals ("Bridge")) {
 			collideBridge = false;
 		}
+	}
+
+	void Die(){
+		over.SetActive (true);
+		this.gameObject.SetActive (false);
 	}
 }
