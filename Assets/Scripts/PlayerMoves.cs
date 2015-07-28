@@ -10,7 +10,6 @@ public class PlayerMoves : MonoBehaviour {
 	public Rigidbody2D rb;
 	public float speed;
 	public float spring;
-	//public string foreground;
 	private byte jumpState=0;
 	
 	public GameObject Score;
@@ -32,15 +31,15 @@ public class PlayerMoves : MonoBehaviour {
 	//set a boundary for player
 	public Boundary boundary;
 
+	public float jumpHeight;
+	private float jumpY;
 
 	// Use this for initialization
-
-
 	void Start () {
 		qua_upright = new Quaternion (0.0f, 0.0f, 0.0f, 0.0f);
 		qua_reverse = new Quaternion (180.0f, 0.0f, 0.0f, 0.0f);
 		gra_upright = new Vector2 (0.0f, -4.8f);
-		gra_reverse = new Vector2 (0.0f, 1.0f);
+		gra_reverse = new Vector2 (0.0f, 9.8f);
 	}
 	
 	// Update is called once per frame
@@ -48,9 +47,9 @@ public class PlayerMoves : MonoBehaviour {
 		//Vector2 position = (Vector2)transform.position;
 		//transform.position = position + Time.deltaTime*Vector2.right * speed;
 		if(Input.GetKeyDown(KeyCode.UpArrow)&&jumpState<2){
-			//
-			rb.AddForce(new Vector2(rigidbody2D.velocity.x,spring));
+			rb.AddForce(new Vector2(0,spring));
 			jumpState++;
+			jumpY=transform.position.y;
 		}
 		//if(Input.GetKey(KeyCode.RightArrow)&&jumpState<2){
 			//rb.velocity= new Vector2(0,jumpHight);
@@ -59,14 +58,13 @@ public class PlayerMoves : MonoBehaviour {
 		score ++;
 		//set UI Score??
 		FlipAction ();
-		Debug.Log ("----> Gravity:" + Physics2D.gravity);
 	}
 
 	void FixedUpdate(){
 		Rigidbody2D rigidBody = GetComponent<Rigidbody2D> ();
 		rigidBody.position = new Vector2 (
 			rigidBody.position.x,
-			Mathf.Clamp(rigidBody.position.y, boundary.yMin, boundary.yMax)
+			Mathf.Clamp(rigidBody.position.y, float.NegativeInfinity, jumpY+jumpHeight)
 		);
 	}
 
@@ -79,7 +77,7 @@ public class PlayerMoves : MonoBehaviour {
 			Physics2D.gravity = gra_reverse;
 			spaceKeyDown = true;
 			
-			Debug.LogWarning("Button down");
+			//Debug.LogWarning("Button down");
 			if (flip == 0) {
 				//this function is called in update
 				flipPos -= new Vector3 (0.0f, 2.8f, 0.0f);

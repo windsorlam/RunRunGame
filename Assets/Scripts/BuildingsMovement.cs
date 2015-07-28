@@ -25,9 +25,9 @@ public class BuildingsMovement : MonoBehaviour {
 			return;
 		float maxX = float.NegativeInfinity;
 		foreach (GameObject building in buildings) {
-			building.transform.localPosition=(Vector2)(building.transform.localPosition)-Time.deltaTime*Vector2.right * scrollingSpeed;
+			building.transform.position=(Vector2)(building.transform.position)-Time.deltaTime*Vector2.right * scrollingSpeed;
 			BoxCollider2D bc=building.gameObject.GetComponent<BoxCollider2D>();
-			float newX=building.transform.localPosition.x+bc.size.x/2;
+			float newX=building.transform.position.x+bc.size.x/2;
 			if(newX>maxX)
 				maxX=newX;
 		}//Get the rightest building's x position
@@ -35,12 +35,11 @@ public class BuildingsMovement : MonoBehaviour {
 			bool moved=false;
 			while(!moved){
 				int i=Random.Range(0,buildings.Length);
-				//Debug.Log ("buidings"+buildings.Length);
 				GameObject building=buildings[i];
 				BoxCollider2D bc=building.gameObject.GetComponent<BoxCollider2D>();
-				if(building.transform.localPosition.x<-screenWidth/2-bc.size.x/2){
-					float y=building.transform.localPosition.y;
-					building.transform.localPosition=new Vector3(maxX+Random.Range(minDistance,maxDistance)+bc.size.x/4,y,0f);
+				if(building.transform.position.x<-screenWidth/2-bc.size.x/2){
+					float y=building.transform.position.y;
+					building.transform.position=new Vector3(maxX+Random.Range(minDistance,maxDistance)+bc.size.x/4,y,0f);
 					moved=true;
 				}
 			}
