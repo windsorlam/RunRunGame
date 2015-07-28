@@ -5,19 +5,21 @@ using System.Collections;
 public class StartControl : MonoBehaviour {
 	public GameObject player;
 	public AudioSource bgm;
-	public GameObject text;
+	public GameObject score;
+	public GameObject label;
 	// Use this for initialization
 	void Start () {
-	
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKey (KeyCode.Return)) {
-			player.SetActive(true);
-			text.SetActive(true);
-			bgm.Play();
 			this.gameObject.SetActive(false);
+			player.SetActive(true);
+			label.SetActive(true);
+			score.SetActive(true);
+			bgm.Play();
 		}
 	}
 }

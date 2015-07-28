@@ -13,7 +13,7 @@ public class Score : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		score += Time.deltaTime*10;
-		Text text = GetComponent<Text> ();
-		text.text = ((int)score).ToString();
+		Text scoreUI = GetComponent<Text> ();
+		scoreUI.text = ((int)score).ToString();
 	}
 }

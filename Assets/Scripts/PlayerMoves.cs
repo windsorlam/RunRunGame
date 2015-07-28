@@ -13,6 +13,7 @@ public class PlayerMoves : MonoBehaviour {
 	private byte jumpState=0;
 	public float bottomY;
 	public GameObject over;
+	public GameObject scoreLabel, ScoreUI;
 
 	//variables for flip
 	int flip = 0;
@@ -123,5 +124,7 @@ public class PlayerMoves : MonoBehaviour {
 	void Die(){
 		over.SetActive (true);
 		this.gameObject.SetActive (false);
+		scoreLabel.gameObject.SetActive (false);
+		ScoreUI.gameObject.SetActive (false);
 	}
 }
