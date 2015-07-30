@@ -6,7 +6,7 @@ public class Score : MonoBehaviour {
 	private float score;
 	public static float highestScore;
 	private Text scoreUI;
-	//public Text cong;
+	public Text cong;
 	bool highest = false;
 
 	// Use this for initialization
@@ -34,6 +34,6 @@ public class Score : MonoBehaviour {
 	IEnumerator WaitAndPrint(float waitTime){
 		print("----> waiting ... ");
 		yield return new WaitForSeconds (waitTime);
-		//cong.gameObject.SetActive (false);
+		cong.gameObject.SetActive (false);
 	}
 }
