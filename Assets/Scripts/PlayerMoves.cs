@@ -139,19 +139,5 @@ public class PlayerMoves : MonoBehaviour {
 		scoreLabel.gameObject.SetActive (false);
 		ScoreUI.gameObject.SetActive (false);
 
-		filestr = new FileStream("/Users/LIUXUNYU/Desktop/runrungame.txt",FileMode.Open);
-		writer = new StreamWriter(filestr);
-		String highestRecord = Score.highestScore.ToString ();
-		
-		try{
-			writer.WriteLine(highestRecord);
-			writer.Close();
-		}
-		catch (IOException ex){
-			Debug.Log(ex.Message);
-			//Console.ReadLine(); //?????
-			return ;
-		}
-		filestr.Close();
 	}
 }

@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class Score : MonoBehaviour {
-	private float score=0.0f;
+	private float score;
 	public static float highestScore;
 	private Text scoreUI;
 	public Text cong;
@@ -11,6 +11,7 @@ public class Score : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		score=0.0f;
 		scoreUI = GetComponent<Text> ();
 	}
 	
