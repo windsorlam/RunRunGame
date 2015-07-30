@@ -136,10 +136,7 @@ public class PlayerMoves : MonoBehaviour {
 		this.gameObject.SetActive (false);
 		scoreLabel.gameObject.SetActive (false);
 		ScoreUI.gameObject.SetActive (false);
-<<<<<<< HEAD
  		backgroundMusic.Stop();
-=======
 
->>>>>>> origin/master
 	}
 }
