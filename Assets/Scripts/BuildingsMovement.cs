@@ -27,7 +27,7 @@ public class BuildingsMovement : MonoBehaviour {
 		foreach (GameObject building in buildings) {
 			building.transform.position=(Vector2)(building.transform.position)-Time.deltaTime*Vector2.right * scrollingSpeed;
 			BoxCollider2D bc=building.gameObject.GetComponent<BoxCollider2D>();
-			float newX=building.transform.position.x+bc.size.x/2;
+			float newX=building.transform.position.x + bc.size.x/2;
 			if(newX>maxX)
 				maxX=newX;
 		}//Get the rightest building's x position

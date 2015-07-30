@@ -112,6 +112,9 @@ public class PlayerMoves : MonoBehaviour {
 		if (other.gameObject.tag.Equals ("Bridge")) {
 			collideBridge = true;
 		} 
+		if (other.gameObject.tag.Equals ("obstacle")) {
+			Die();
+		} 
 	}
 
 
