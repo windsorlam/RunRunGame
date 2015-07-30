@@ -100,7 +100,7 @@ public class PlayerMoves : MonoBehaviour {
 		} 
  			
 		if (Input.GetKeyUp (KeyCode.Space) && spaceKeyDown) {
-			Debug.LogWarning("Button up");
+			//Debug.LogWarning("Button up");
 			rb.gameObject.transform.localRotation = qua_upright;
 			Physics2D.gravity = gra_upright;
 
