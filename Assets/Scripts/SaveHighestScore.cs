@@ -11,7 +11,7 @@ public class SaveHighestScore : MonoBehaviour {
 	string strLine;
 	// Use this for initialization
 	void Start () {
-		filestr = new FileStream("/Users/LIUXUNYU/Desktop/runrungame.txt",FileMode.Open);
+		filestr = new FileStream("Assets/Data/runrungame.txt",FileMode.Open);
 		writer = new StreamWriter(filestr);
 		String highestRecord = Score.highestScore.ToString ();
 		

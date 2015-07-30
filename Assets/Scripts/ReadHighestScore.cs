@@ -11,7 +11,7 @@ public class ReadHighestScore: MonoBehaviour {
 	string strLine;
 	// Use this for initialization
 	void Start () {
-		filestr = new FileStream("/Users/LIUXUNYU/Desktop/runrungame.txt",FileMode.Open);
+		filestr = new FileStream("Assets/Data/runrungame.txt",FileMode.OpenOrCreate);
 		reader = new StreamReader(filestr);
 
 		//as long as the game start, get the highest score from the file
