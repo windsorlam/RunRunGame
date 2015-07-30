@@ -1,6 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.IO;
+
 [System.Serializable]
 public class Boundary{
 	public float yMin, yMax;
@@ -25,6 +30,10 @@ public class PlayerMoves : MonoBehaviour {
 	private Quaternion qua_upright, qua_reverse;
 	Vector2 gra_upright, gra_reverse;
 
+
+	FileStream filestr;
+	StreamWriter writer;
+	string strLine;
 	//jump MA
 	//public float moveSpeed;
 	//public float jumpHight;
@@ -127,6 +136,10 @@ public class PlayerMoves : MonoBehaviour {
 		this.gameObject.SetActive (false);
 		scoreLabel.gameObject.SetActive (false);
 		ScoreUI.gameObject.SetActive (false);
+<<<<<<< HEAD
  		backgroundMusic.Stop();
+=======
+
+>>>>>>> origin/master
 	}
 }
