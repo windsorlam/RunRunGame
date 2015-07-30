@@ -6,7 +6,7 @@ public class Score : MonoBehaviour {
 	private float score;
 	public static float highestScore;
 	private Text scoreUI;
-	public Text cong;
+	//public Text cong;
 	bool highest = false;
 
 	// Use this for initialization

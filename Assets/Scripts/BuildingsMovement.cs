@@ -10,6 +10,7 @@ public class BuildingsMovement : MonoBehaviour {
 	public float screenWidth;
 	public Text score;
 
+
 	void Start () {
 		/*float offset=-screenWidth/2;
 		Random.seed = seed;

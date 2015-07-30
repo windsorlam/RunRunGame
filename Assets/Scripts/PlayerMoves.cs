@@ -19,6 +19,7 @@ public class PlayerMoves : MonoBehaviour {
 	public float bottomY;
 	public GameObject over;
 	public GameObject scoreLabel, ScoreUI;
+	public AudioSource backgroundMusic;
 
 	//variables for flip
 	int flip = 0;
@@ -99,7 +100,7 @@ public class PlayerMoves : MonoBehaviour {
 		} 
  			
 		if (Input.GetKeyUp (KeyCode.Space) && spaceKeyDown) {
-			Debug.LogWarning("Button up");
+			//Debug.LogWarning("Button up");
 			rb.gameObject.transform.localRotation = qua_upright;
 			Physics2D.gravity = gra_upright;
 
@@ -111,7 +112,7 @@ public class PlayerMoves : MonoBehaviour {
 	}
 	
 	void OnCollisionEnter2D(Collision2D other){
-		if (other.gameObject.tag.Equals ("Building") || other.gameObject.tag.Equals ("Bridge") && other.relativeVelocity.y<0) {
+		if (other.gameObject.tag.Equals ("Building") || other.gameObject.tag.Equals ("Bridge") && other.relativeVelocity.y<0||other.gameObject.tag.Equals ("obstacle")) {
 			jumpState=0;
 			ContactPoint2D[] contacts=other.contacts;
 			if(contacts[0].normal.y==0){
@@ -120,9 +121,6 @@ public class PlayerMoves : MonoBehaviour {
 		}
 		if (other.gameObject.tag.Equals ("Bridge")) {
 			collideBridge = true;
-		} 
-		if (other.gameObject.tag.Equals ("obstacle")) {
-			Die();
 		} 
 	}
 
@@ -138,6 +136,7 @@ public class PlayerMoves : MonoBehaviour {
 		this.gameObject.SetActive (false);
 		scoreLabel.gameObject.SetActive (false);
 		ScoreUI.gameObject.SetActive (false);
+ 		backgroundMusic.Stop();
 
 	}
 }
