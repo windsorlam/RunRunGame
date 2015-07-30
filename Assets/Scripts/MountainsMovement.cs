@@ -1,13 +1,15 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class MountainsMovement : MonoBehaviour {
 	public GameObject[] mountains;
-	public float scrollingSpeed;
+	float scrollingSpeed=1f;
 	public float minOffset;
 	public float maxOffset;
 	public float screenWidth;
 	public float mountainWidth;
+	public Text score;
 	// Use this for initialization
 	void Start () {
 		
@@ -24,6 +26,18 @@ public class MountainsMovement : MonoBehaviour {
 				float y=mountain.transform.position.y;
 				mountain.transform.position=new Vector2(screenWidth+Random.Range(minOffset,maxOffset),y);
 			}
+		}
+		if (score.IsActive()) {
+			scrollingSpeed=2f;
+		}
+		if (int.Parse (score.text) > 500) {
+			scrollingSpeed=3f;
+		}
+		if(int.Parse(score.text)>1000){
+			scrollingSpeed=4f;
+		}
+		if (int.Parse (score.text) > 2000) {
+			scrollingSpeed=5f;
 		}
 	}
 }

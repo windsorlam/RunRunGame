@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class BuildingsMovement : MonoBehaviour {
 	public GameObject[] buildings;
-	public float scrollingSpeed;
+	float scrollingSpeed=3f;
 	public float minDistance;
 	public float maxDistance;
 	public float screenWidth;
-
+	public Text score;
 
 	void Start () {
 		/*float offset=-screenWidth/2;
@@ -43,6 +44,18 @@ public class BuildingsMovement : MonoBehaviour {
 					moved=true;
 				}
 			}
+		}
+		if (score.IsActive()) {
+			scrollingSpeed=6f;
+		}
+		if (int.Parse (score.text) > 500) {
+			scrollingSpeed=9f;
+		}
+		if(int.Parse(score.text)>1000){
+			scrollingSpeed=12f;
+		}
+		if (int.Parse (score.text) > 2000) {
+			scrollingSpeed=15f;
 		}
 	}
 }
