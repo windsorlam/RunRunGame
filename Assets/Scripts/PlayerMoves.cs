@@ -1,6 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.IO;
+
 [System.Serializable]
 public class Boundary{
 	public float yMin, yMax;
@@ -24,6 +29,10 @@ public class PlayerMoves : MonoBehaviour {
 	private Quaternion qua_upright, qua_reverse;
 	Vector2 gra_upright, gra_reverse;
 
+
+	FileStream filestr;
+	StreamWriter writer;
+	string strLine;
 	//jump MA
 	//public float moveSpeed;
 	//public float jumpHight;
@@ -129,5 +138,20 @@ public class PlayerMoves : MonoBehaviour {
 		this.gameObject.SetActive (false);
 		scoreLabel.gameObject.SetActive (false);
 		ScoreUI.gameObject.SetActive (false);
+
+		filestr = new FileStream("/Users/LIUXUNYU/Desktop/runrungame.txt",FileMode.Open);
+		writer = new StreamWriter(filestr);
+		String highestRecord = Score.highestScore.ToString ();
+		
+		try{
+			writer.WriteLine(highestRecord);
+			writer.Close();
+		}
+		catch (IOException ex){
+			Debug.Log(ex.Message);
+			//Console.ReadLine(); //?????
+			return ;
+		}
+		filestr.Close();
 	}
 }

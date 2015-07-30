@@ -21,6 +21,7 @@ public class Score : MonoBehaviour {
 
 		if (score >= highestScore && !highest) {
 			cong.gameObject.SetActive(true);
+			highestScore = score;
 			highest = true;
 			StartCoroutine(WaitAndPrint(3.0f));
 		}
