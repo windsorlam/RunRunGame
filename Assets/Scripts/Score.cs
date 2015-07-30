@@ -12,6 +12,7 @@ public class Score : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		score=0.0f;
+		highest = false;
 		scoreUI = GetComponent<Text> ();
 	}
 	
@@ -20,11 +21,13 @@ public class Score : MonoBehaviour {
 		score += Time.deltaTime*10;
 		scoreUI.text = ((int)score).ToString();
 
-		if (score >= highestScore && !highest) {
-			//cong.gameObject.SetActive(true);
+		if (score >= highestScore) {
+			if(!highest){
+				cong.gameObject.SetActive(true);
+				highest = true;
+				StartCoroutine(WaitAndPrint(3.0f));
+			}
 			highestScore = score;
-			highest = true;
-			StartCoroutine(WaitAndPrint(3.0f));
 		}
 	}
 
