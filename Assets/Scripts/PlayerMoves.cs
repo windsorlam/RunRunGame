@@ -1,10 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.IO;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class Boundary{
@@ -19,6 +15,8 @@ public class PlayerMoves : MonoBehaviour {
 	public float bottomY;
 	public GameObject over;
 	public GameObject scoreLabel, ScoreUI;
+	public GameObject RecordLabel;
+	public GameObject HighestScore;
 	public AudioSource backgroundMusic;
 
 	//variables for flip
@@ -29,11 +27,7 @@ public class PlayerMoves : MonoBehaviour {
 	private Vector3 flipPos;
 	private Quaternion qua_upright, qua_reverse;
 	Vector2 gra_upright, gra_reverse;
-
-
-	FileStream filestr;
-	StreamWriter writer;
-	string strLine;
+	
 	//jump MA
 	//public float moveSpeed;
 	//public float jumpHight;
@@ -137,6 +131,7 @@ public class PlayerMoves : MonoBehaviour {
 		scoreLabel.gameObject.SetActive (false);
 		ScoreUI.gameObject.SetActive (false);
  		backgroundMusic.Stop();
-
+		HighestScore.SetActive (false);
+		RecordLabel.SetActive (false);
 	}
 }

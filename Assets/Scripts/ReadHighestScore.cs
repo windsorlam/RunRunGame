@@ -17,11 +17,6 @@ public class ReadHighestScore: MonoBehaviour {
 		//as long as the game start, get the highest score from the file
 		try{
 			strLine = reader.ReadLine();
-			/*
-				while(strLine != null){
-					Debug.Log("We got: " + strLine);
-					strLine = reader.ReadLine();
-				}*/
 			Score.highestScore = float.Parse(strLine);
 			reader.Close();
 		}

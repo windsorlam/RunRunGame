@@ -8,6 +8,7 @@ public class Score : MonoBehaviour {
 	private Text scoreUI;
 	public Text cong;
 	bool highest = false;
+	public Text HighestScoreUI;
 
 	// Use this for initialization
 	void Start () {
@@ -28,6 +29,7 @@ public class Score : MonoBehaviour {
 				StartCoroutine(WaitAndPrint(3.0f));
 			}
 			highestScore = score;
+			HighestScoreUI.text = ((int)highestScore).ToString();
 		}
 	}
 
