@@ -11,8 +11,7 @@ public class PlayerMoves : MonoBehaviour {
 	public float bottomY;
 	public GameObject over;
 	public GameObject scoreLabel, ScoreUI;
-	public GameObject RecordLabel;
-	public GameObject HighestScore;
+	public GameObject highscore;
 	public AudioSource backgroundMusic;
 
 	//variables for flip
@@ -44,7 +43,8 @@ public class PlayerMoves : MonoBehaviour {
 		//Vector2 position = (Vector2)transform.position;
 		//transform.position = position + Time.deltaTime*Vector2.right * speed;
 		if(Input.GetKeyDown(KeyCode.UpArrow)&&jumpState<2){
-			rb.AddForce(new Vector2(0,spring));
+			rb.velocity=new Vector2(rb.velocity.x,0);
+			rb.AddForce(new Vector2(0,spring+rb.mass*System.Math.Abs(Physics.gravity.y)));
 			jumpState++;
 			jumpY=transform.position.y;
 			//Debug.Log("state"+jumpState.ToString()+" y"+jumpY.ToString());
@@ -122,8 +122,7 @@ public class PlayerMoves : MonoBehaviour {
 		this.gameObject.SetActive (false);
 		scoreLabel.gameObject.SetActive (false);
 		ScoreUI.gameObject.SetActive (false);
+		highscore.SetActive (false);
  		backgroundMusic.Stop();
-		HighestScore.SetActive (false);
-		RecordLabel.SetActive (false);
 	}
 }

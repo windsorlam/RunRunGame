@@ -11,8 +11,9 @@ public class OverControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Time.time - overTime > 5||Input.GetKey (KeyCode.Return)) {
+		if (Time.time - overTime > 5||Input.GetKeyDown (KeyCode.Return)) {
 			Application.LoadLevel("Main");
+			Score.highest = false;
 		}
 	}
 }
