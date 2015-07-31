@@ -2,14 +2,10 @@
 using System.Collections;
 using UnityEngine.UI;
 
-[System.Serializable]
-public class Boundary{
-	public float yMin, yMax;
-}
+
 
 public class PlayerMoves : MonoBehaviour {
 	public Rigidbody2D rb;
-	public float speed;
 	public float spring;
 	private byte jumpState=0;
 	public float bottomY;
@@ -31,9 +27,6 @@ public class PlayerMoves : MonoBehaviour {
 	//jump MA
 	//public float moveSpeed;
 	//public float jumpHight;
-	
-	//set a boundary for player
-	public Boundary boundary;
 
 	public float jumpHeight;
 	private float jumpY;
@@ -42,7 +35,7 @@ public class PlayerMoves : MonoBehaviour {
 	void Start () {
 		qua_upright = new Quaternion (0.0f, 0.0f, 0.0f, 0.0f);
 		qua_reverse = new Quaternion (180.0f, 0.0f, 0.0f, 0.0f);
-		gra_upright = new Vector2 (0.0f, -4.8f);
+		gra_upright = new Vector2 (0.0f, -9.8f);
 		gra_reverse = new Vector2 (0.0f, 9.8f);
 	}
 	
@@ -54,11 +47,8 @@ public class PlayerMoves : MonoBehaviour {
 			rb.AddForce(new Vector2(0,spring));
 			jumpState++;
 			jumpY=transform.position.y;
+			//Debug.Log("state"+jumpState.ToString()+" y"+jumpY.ToString());
 		}
-		//if(Input.GetKey(KeyCode.RightArrow)&&jumpState<2){
-			//rb.velocity= new Vector2(0,jumpHight);
-		//	rb.velocity= new Vector2(moveSpeed,rigidbody2D.velocity.y);
-		//}
 		score ++;
 		//set UI Score??
 		FlipAction ();
@@ -106,21 +96,23 @@ public class PlayerMoves : MonoBehaviour {
 	}
 	
 	void OnCollisionEnter2D(Collision2D other){
-		if (other.gameObject.tag.Equals ("Building") || other.gameObject.tag.Equals ("Bridge") && other.relativeVelocity.y<0||other.gameObject.tag.Equals ("obstacle")) {
+		if (other.gameObject.tag.Equals ("Building") || 
+		    other.gameObject.tag.EndsWith ("Bridge") && other.relativeVelocity.y<0||
+		    other.gameObject.tag.Equals ("obstacle")) {
 			jumpState=0;
 			ContactPoint2D[] contacts=other.contacts;
 			if(contacts[0].normal.y==0){
 				Die ();
 			}
 		}
-		if (other.gameObject.tag.Equals ("Bridge")) {
+		if (other.gameObject.tag.EndsWith ("Bridge")) {
 			collideBridge = true;
 		} 
 	}
 
 
 	void OnCollisionExit2D(Collision2D other){
-		if (other.gameObject.tag.Equals ("Bridge")) {
+		if (other.gameObject.tag.EndsWith ("Bridge")) {
 			collideBridge = false;
 		}
 	}

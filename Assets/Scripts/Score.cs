@@ -7,13 +7,14 @@ public class Score : MonoBehaviour {
 	public static float highestScore;
 	private Text scoreUI;
 	public Text cong;
+	public Text highscore;
 	bool highest = false;
 	public Text HighestScoreUI;
 
 	// Use this for initialization
 	void Start () {
 		score=0.0f;
-		highest = false;
+		//highest = false;
 		scoreUI = GetComponent<Text> ();
 	}
 	
@@ -23,19 +24,20 @@ public class Score : MonoBehaviour {
 		scoreUI.text = ((int)score).ToString();
 
 		if (score >= highestScore) {
-			if(!highest){
+			if(/*!highest*/highestScore>0){
 				cong.gameObject.SetActive(true);
-				highest = true;
-				StartCoroutine(WaitAndPrint(3.0f));
+				//highest = true;
+				//StartCoroutine(WaitAndPrint(3.0f));
 			}
 			highestScore = score;
 			HighestScoreUI.text = ((int)highestScore).ToString();
 		}
+		highscore.text="High score: "+((int)highestScore).ToString();
 	}
 
-	IEnumerator WaitAndPrint(float waitTime){
+	/*IEnumerator WaitAndPrint(float waitTime){
 		print("----> waiting ... ");
 		yield return new WaitForSeconds (waitTime);
 		cong.gameObject.SetActive (false);
-	}
+	}*/
 }
