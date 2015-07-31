@@ -11,7 +11,7 @@ public class StartControl : MonoBehaviour {
 	public Text HighestScore;
 	// Use this for initialization
 	void Start () {
-		HighestScore.text = ((int)Score.highestScore).ToString();
+
 	}
 	
 	// Update is called once per frame
@@ -23,7 +23,9 @@ public class StartControl : MonoBehaviour {
 			score.SetActive(true);
 			RecordLabel.SetActive(true);
 			HighestScore.gameObject.SetActive(true);
+			HighestScore.text = ((int)Score.highestScore).ToString();
 			bgm.Play();
 		}
 	}
 }
+
