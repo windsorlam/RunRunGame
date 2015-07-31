@@ -28,16 +28,18 @@ public class MountainsMovement : MonoBehaviour {
 			}
 		}
 		if (score.IsActive()) {
-			scrollingSpeed=2f;
-		}
-		if (int.Parse (score.text) > 500) {
-			scrollingSpeed=3f;
-		}
-		if(int.Parse(score.text)>1000){
-			scrollingSpeed=4f;
-		}
-		if (int.Parse (score.text) > 2000) {
-			scrollingSpeed=5f;
+			if(int.Parse(score.text)>5000){
+				scrollingSpeed=6f;
+			}else if (int.Parse (score.text) > 2000) {
+				scrollingSpeed=5f;
+			}else if(int.Parse(score.text)>1000){
+				scrollingSpeed=4f;
+			}else if (int.Parse (score.text) > 500) {
+				scrollingSpeed=3f;
+			}else if (int.Parse (score.text) > 100) {
+				scrollingSpeed=2.5f;
+			}else
+				scrollingSpeed=2f;
 		}
 	}
 }

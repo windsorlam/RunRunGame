@@ -7,6 +7,7 @@ public class StartControl : MonoBehaviour {
 	public AudioSource bgm;
 	public GameObject score;
 	public GameObject label;
+	public GameObject highScore;
 	public GameObject RecordLabel;
 	public Text HighestScore;
 	// Use this for initialization
@@ -21,6 +22,7 @@ public class StartControl : MonoBehaviour {
 			player.SetActive(true);
 			label.SetActive(true);
 			score.SetActive(true);
+			highScore.SetActive(true);
 			RecordLabel.SetActive(true);
 			HighestScore.gameObject.SetActive(true);
 			HighestScore.text = ((int)Score.highestScore).ToString();
